@@ -1,0 +1,230 @@
+[gd_scene load_steps=8 format=3 uid="uid://yvu7nbxlpchv"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_ew12f"]
+[ext_resource type="PackedScene" uid="uid://bhant6p4qwd22" path="res://player.tscn" id="1_umj1u"]
+[ext_resource type="PackedScene" uid="uid://buqbrxpeobrqu" path="res://pine_tree.tscn" id="2_a1jot"]
+
+[sub_resource type="Curve2D" id="Curve2D_o2h5b"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -68, -82, 0, 0, 0, 0, 2024, -70, 0, 0, 0, 0, 2024, 1143, 0, 0, 0, 0, -70, 1147, 0, 0, 0, 0, -56, -65, 0, 0, 0, 0, -60, -72)
+}
+point_count = 6
+
+[sub_resource type="Animation" id="Animation_20y5g"]
+resource_name = "visible"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScoreLabel:theme_override_colors/font_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayAgainButton:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_hgdtp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScoreLabel:theme_override_colors/font_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayAgainButton:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2lrby"]
+_data = {
+"RESET": SubResource("Animation_hgdtp"),
+"visible": SubResource("Animation_20y5g")
+}
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_ew12f")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1928.0
+offset_bottom = 1088.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Player" parent="." instance=ExtResource("1_umj1u")]
+position = Vector2(1326, 363)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Path2D" type="Path2D" parent="Player"]
+position = Vector2(-1326, -363)
+curve = SubResource("Curve2D_o2h5b")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
+position = Vector2(-68, -82)
+rotation = 0.00573607
+
+[node name="PineTree" parent="." instance=ExtResource("2_a1jot")]
+position = Vector2(90, 796)
+
+[node name="PineTree2" parent="." instance=ExtResource("2_a1jot")]
+position = Vector2(296, 130)
+
+[node name="PineTree3" parent="." instance=ExtResource("2_a1jot")]
+position = Vector2(1340, 392)
+
+[node name="PineTree4" parent="." instance=ExtResource("2_a1jot")]
+position = Vector2(1262, 372)
+
+[node name="PineTree5" parent="." instance=ExtResource("2_a1jot")]
+position = Vector2(1262, 436)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer2/ColorRect"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 232.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Slimes killed: 0"
+
+[node name="Label" type="Label" parent="CanvasLayer2/ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -221.0
+offset_top = -53.0
+offset_right = 221.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 77
+text = "GAME OVER"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2/ColorRect"]
+libraries = {
+"": SubResource("AnimationLibrary_2lrby")
+}
+
+[node name="PlayAgainButton" type="Button" parent="CanvasLayer2/ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.5
+offset_top = 60.0
+offset_right = 107.5
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "Play again"
+
+[node name="Enemies" type="Node" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+[connection signal="button_down" from="CanvasLayer2/ColorRect/PlayAgainButton" to="." method="_on_button_button_down"]
